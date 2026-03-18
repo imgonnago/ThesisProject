@@ -4,7 +4,7 @@ import numpy as np
 
 builder = tfds.builder_from_directory('D:/bridge_data/bridge_orig/1.0.0')
 data = builder.as_dataset(split='train')
-print(data.info)
+print(builder.info)
 
 # 데이터 로드
 data = builder.as_dataset(split='train')
