@@ -4,8 +4,9 @@ matplotlib.use('TkAgg')
 import matplotlib.pyplot as plt
 import numpy as np
 import platform
+from tqdm import tqdm
 
-def data_info():
+def data_load():
     print('=====data lodad=====')
     print('=====data info======')
     if platform.system() == 'Window':
@@ -19,7 +20,7 @@ def data_info():
         print(builder.info)
         return data
 
-data = data_info()
+data = data_load()
 
 def show_image(cnt=3):
     global data
@@ -31,9 +32,9 @@ def show_image(cnt=3):
     }
 
     chooes_image = input('보고싶은 이미지를 선택: ')
-    for i,episod in enumerate(data.take(cnt)):
+    for i,episode in enumerate(tqdm(data.take(cnt))):
 
-        steps = list(episod['steps'])
+        steps = list(episode['steps'])
         step = steps[0]
 
         fig, axes = plt.subplots(1, 1, figsize=(5, 5))
@@ -45,7 +46,7 @@ def show_image(cnt=3):
 
 def show_data(cnt=3):
     global data
-    for i, episode in enumerate(data.take(cnt)):
+    for i, episode in enumerate(tqdm(data.take(cnt))):
         steps = list(episode['steps'])
         print("에피소드 길이:", len(steps))
 
